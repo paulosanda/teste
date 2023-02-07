@@ -21,6 +21,11 @@
             <div class="mb-3" id="cep">
                 <label class="form-label" for="cep">Cep</label>
                 <input type="text" class="form-control" name="cep" id="cep" required>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+	                    $("#cep").mask("99.999-999");
+                    });
+                </script>
             </div>
             <div class="mb-3" id="endereco">
                 <label class="form-label" for="endereco">Endereço:</label>

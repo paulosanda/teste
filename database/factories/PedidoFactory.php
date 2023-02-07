@@ -16,8 +16,6 @@ class PedidoFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

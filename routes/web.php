@@ -29,7 +29,12 @@ Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente.index
 Route::post('/cliente/search', [ClienteController::class, 'search'])->name('cliente.search');
 Route::get('/cliente/{id}', [ClienteController::class, 'show'])->name('cliente.show');
 
-Route::get('/produto', [ProdutoController::class, 'index'])->name('produto.index');
 Route::get('/produto/cadastrar', function () {
     return view('produtocreate');
 })->name('produto.add');
+Route::get('/produto', [ProdutoController::class, 'index'])->name('produto.index');
+Route::post('/produto', [ProdutoController::class, 'store'])->name('produto.store');
+Route::put('/produto/{id}', [ProdutoController::class, 'update'])->name('produto.update');
+Route::delete('/produto/{id}', [ProdutoController::class, 'destroy'])->name('produto.delete');
+Route::post('/produto/search', [ProdutoController::class, 'search'])->name('produto.search');
+Route::get('/produto/{id}', [ProdutoController::class, 'show'])->name('produto.show');

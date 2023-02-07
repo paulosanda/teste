@@ -18,7 +18,11 @@ class ClienteTest extends TestCase
             'email' => 'joao@joao.net',
             'telefone' => '11-9999 8877',
             'cpf' => '123456789',
-            'endereco' => 'Rua que sobe desce 98 - Bairro Alvorada - São Paulo - SP - CEP 11552224',
+            'endereco' => 'Rua que sobe desce',
+            'numero' => '324',
+            'cep' => '123456789',
+            'cidade' => 'Jundiaí',
+            'uf' => 'SP',
         ]);
 
         $this->assertDatabaseHas('clientes', [
@@ -26,7 +30,6 @@ class ClienteTest extends TestCase
             'email' => 'joao@joao.net',
             'telefone' => '11-9999 8877',
             'cpf' => '123456789',
-            'endereco' => 'Rua que sobe desce 98 - Bairro Alvorada - São Paulo - SP - CEP 11552224',
         ]);
     }
 
