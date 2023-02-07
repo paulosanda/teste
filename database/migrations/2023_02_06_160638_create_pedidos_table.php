@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->enum('status', ['Aberto', 'Pago', 'Cancelado']);
-            $table->foreringId('cliente_id')->constrained()->onDelete('cascade');
+            $table->foreignId('cliente_id')->constrained()->onDelete('cascade');
             $table->integer('valor')->nullable();
             $table->timestamps();
         });
