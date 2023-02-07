@@ -62,6 +62,8 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         $delete = Cliente::where('id', $id)->delete();
+
+        return redirect()->action([ClienteController::class, 'index']);
     }
 
     public function search(Request $request)
