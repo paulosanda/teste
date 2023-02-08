@@ -38,3 +38,9 @@ Route::put('/produto/{id}', [ProdutoController::class, 'update'])->name('produto
 Route::delete('/produto/{id}', [ProdutoController::class, 'destroy'])->name('produto.delete');
 Route::post('/produto/search', [ProdutoController::class, 'search'])->name('produto.search');
 Route::get('/produto/{id}', [ProdutoController::class, 'show'])->name('produto.show');
+
+Route::get('/pedido', [PedidoController::class, 'index'])->name('pedido.index');
+Route::get('/pedido/cliente/{id}', [PedidoController::class, 'create'])->name('pedido.create');
+Route::post('/pedido', [PedidoController::class, 'store'])->name('pedido.store');
+Route::get('/pedido/show', [PedidoController::class, 'show'])->name('pedido.show');
+Route::put('/pedido/{id}', [PedidoController::class, 'update'])->name('pedido.update');

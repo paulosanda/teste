@@ -31,7 +31,7 @@ class ClienteController extends Controller
     }
     public function store(ClienteRequest $request)
     {
-        $endereco = $request->endereco . ', ' . $request->numero . " \r\n "  .
+        $endereco = $request->rua . ', ' . $request->numero . " \r\n "  .
             'CEP ' . $request->cep .  " \r\n "  .
             $request->cidade . ' - ' . $request->uf;
         Cliente::create([

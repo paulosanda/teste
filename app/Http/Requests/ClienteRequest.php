@@ -28,7 +28,6 @@ class ClienteRequest extends FormRequest
             'email' => 'required | email',
             'telefone' => 'required',
             'cpf' => 'required',
-            'endereco' => 'required',
         ];
     }
 }
