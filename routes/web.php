@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\PedidoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +43,7 @@ Route::get('/produto/{id}', [ProdutoController::class, 'show'])->name('produto.s
 Route::get('/pedido', [PedidoController::class, 'index'])->name('pedido.index');
 Route::get('/pedido/cliente/{id}', [PedidoController::class, 'create'])->name('pedido.create');
 Route::post('/pedido', [PedidoController::class, 'store'])->name('pedido.store');
-Route::get('/pedido/show', [PedidoController::class, 'show'])->name('pedido.show');
+Route::get('/pedido/{id}', [PedidoController::class, 'show'])->name('pedido.show');
 Route::put('/pedido/{id}', [PedidoController::class, 'update'])->name('pedido.update');
+Route::post('/pedido/search', [PedidoController::class, 'search'])->name('pedido.search');
+Route::delete('/pedido/{id}', [PedidoController::class, 'destroy'])->name('pedido.delete');
