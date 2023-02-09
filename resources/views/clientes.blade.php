@@ -21,13 +21,42 @@
                     <td> @nl2br($cliente->endereco) </td>
                     <td> {{ $cliente->cpf }}</td>
                     <td>
-                        <form method="post" action="{{route('cliente.delete', $cliente->id)}}">
-                            <a href="{{route('cliente.show', $cliente->id)}}"><span class="material-symbols-outlined">settings</span></a>
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" class="material-symbols-outlined" value="delete">
-
-                        </form>
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container-fluid">
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto sm-2 mb-sm-0">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class="material-symbols-outlined">settings</span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href=" {{ route('pedido.create', $cliente->id)}} ">
+                                                        <button type="button" class="btn btn-sm">Novo pedido</button>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href=" {{ route('pedido.index','cliente_id='.$cliente->id)}}">
+                                                        <button type="button" class="btn btn-sm">Pedidos</button>
+                                                    </a>
+                                                </li>
+                                                <li><a href="{{route('cliente.show', $cliente->id)}}">
+                                                        <button type="button" class="btn btn-sm">Editar cadastro</button>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <form method="post" action="{{route('cliente.delete', $cliente->id)}}">
+                                                        @csrf
+                                                    @method('DELETE')
+                                                    <input type="submit" class="btn btn-sm" value="Deletar cadastro">
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
                     </td>
                 </tr>
             @endforeach

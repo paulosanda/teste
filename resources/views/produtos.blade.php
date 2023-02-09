@@ -19,13 +19,32 @@
                     <td>@nl2br($produto->descricao)</td>
                     <td>R$ {{ number_format($produto->valor/100, 2, ',', '.') }}</td>
                     <td>
-                        <form method="post" action="{{route('produto.delete', $produto->id)}}">
-                            <a href="{{route('produto.show', $produto->id)}}"><span class="material-symbols-outlined">settings</span></a>
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" class="material-symbols-outlined" value="delete">
-
-                        </form>
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container-fluid">
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto sm-2 mb-sm-0">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class="material-symbols-outlined">settings</span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{{route('produto.show', $produto->id)}}">
+                                                        <button type="button" class="btn btn-sm">Editar</button>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <form method="post" action="{{route('produto.delete', $produto->id)}}">
+                                                        @csrf
+                                                    @method('DELETE')
+                                                    <input type="submit" class="btn btn-sm" value="Deletar">
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
                     </td>
                 </tr>
             @endforeach

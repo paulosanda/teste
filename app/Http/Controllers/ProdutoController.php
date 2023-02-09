@@ -53,6 +53,7 @@ class ProdutoController extends Controller
     public function update(ProdutoRequest $request, $id)
     {
         $valor = $this->stringtoint($request->valor);
+
         Produto::where('id', $id)->update([
             'codigo' => $request->codigo,
             'nome' => $request->nome,

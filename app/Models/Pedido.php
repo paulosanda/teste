@@ -12,6 +12,17 @@ class Pedido extends Model
     protected $fillable = [
         'status',
         'cliente_id',
+        'cliente_nome',
         'valor',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(PedidoProduto::class);
+    }
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
 }

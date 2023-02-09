@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->enum('status', ['Aberto', 'Pago', 'Cancelado']);
             $table->foreignId('cliente_id')->constrained()->onDelete('cascade');
+            $table->string('cliente_nome');
             $table->integer('valor')->nullable();
             $table->timestamps();
         });
