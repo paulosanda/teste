@@ -17,11 +17,11 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="cpf">CPF:</label>
-                <input type="text" class="form-control" id="inputCPF" name="cpf" required>
+                <input type="text" class="form-control inputCPF" id="inputCPF" name="cpf" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="telefone">Telefone:</label>
-                <input type="text" class="form-control" id="telefone" name="telefone" required>
+                <input type="text" class="form-control phone-mask" id="telefone" name="telefone" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="email">Email:</label>
@@ -62,6 +62,8 @@
 
     $(document).ready(function(){
         $('.cep-mask').mask('00000-000');
+        $('.phone-mask').mask('(00) 00000 0000');
+        $('.inputCPF').mask('000.000.000-00');
     });
 
 
@@ -128,9 +130,7 @@
     };
 
 
-    $(document).ready(function(){
-        $('#inputCPF').mask('000.000.000-00');
-    });
+
 
     function validateCPF(cpf) {
 
