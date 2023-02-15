@@ -17,7 +17,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="cpf">CPF:</label>
-                <input type="text" class="form-control" id="RegraValida" name="cpf" onblur="javascript: fMasc( this, mCPF );" required>
+                <input type="text" class="form-control" id="inputCPF" name="cpf" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="telefone">Telefone:</label>
@@ -29,7 +29,7 @@
             </div>
             <div class="mb-3" id="cep">
                 <label class="form-label" for="cep">Cep</label>
-                <input type="text" class="form-control" name="cep" id="cep" required onblur="pesquisacep(this.value);">
+                <input type="text" class="form-control cep-mask" name="cep" id="cep" required onblur="pesquisacep(this.value);">
             </div>
             <div class="mb-3" id="endereco">
                 <label class="form-label" for="endereco">Endereço:</label>
@@ -57,32 +57,112 @@
             </div>
         </div>
     </form>
+
 <script>
-    function ValidaCPF(){
-	var RegraValida=document.getElementById("RegraValida").value;
-	var cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/;
-	if (cpfValido.test(RegraValida) == true)	{
-	console.log("CPF Válido");
-	} else	{
-	console.log("CPF Inválido");
-	}
+
+    $(document).ready(function(){
+        $('.cep-mask').mask('00000-000');
+    });
+
+
+    function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('rua').value=("");
+            document.getElementById('cidade').value=("");
+            document.getElementById('uf').value=("");
     }
-  function fMasc(objeto,mascara) {
-obj=objeto
-masc=mascara
-setTimeout("fMascEx()",1)
-}
 
-  function fMascEx() {
-obj.value=masc(obj.value)
-}
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('rua').value=(conteudo.logradouro);
+            document.getElementById('cidade').value=(conteudo.localidade);
+            document.getElementById('uf').value=(conteudo.uf);
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
 
-   function mCPF(cpf){
-cpf=cpf.replace(/\D/g,"")
-cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
-cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
-cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
-return cpf
-}
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('rua').value="...";
+                document.getElementById('cidade').value="...";
+                document.getElementById('uf').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    };
+
+
+    $(document).ready(function(){
+        $('#inputCPF').mask('000.000.000-00');
+    });
+
+    function validateCPF(cpf) {
+
+        cpf = cpf.replace(/[^\d]+/g,''); // Remove tudo que não é número
+
+        var sum = 0;
+        var     rest;
+
+        if (cpf == "00000000000") return false;
+
+        for (var i=1; i<=9; i++) sum = sum + parseInt(cpf.substring(i-1, i)) * (11 - i);
+        rest = (sum * 10) % 11;
+
+        if ((rest == 10) || (rest == 11))  rest = 0;
+        if (rest != parseInt(cpf.substring(9, 10)) ) return false;
+
+        sum = 0;
+        for (var i = 1; i <= 10; i++) sum = sum + parseInt(cpf.substring(i-1, i)) * (12 - i);
+        rest = (sum * 10) % 11;
+
+        if ((rest == 10) || (rest == 11))  rest = 0;
+        if (rest != parseInt(cpf.substring(10, 11) ) ) return false;
+        return true;
+    }
+
+    var inputCPF = document.getElementById("inputCPF");
+    inputCPF.addEventListener("blur", function() {
+    if (!validateCPF(inputCPF.value)) {
+    alert("CPF inválido!");
+  }
+});
+
 </script>
+
 </x-app>
